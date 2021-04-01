@@ -153,6 +153,10 @@ abstract class Segment_QueueConsumer extends Segment_Consumer {
       $success = $this->flushBatch($batch);
 
       $count = count($this->queue);
+      
+      if ($count === 0) {
+        return $success;
+      }
 
       usleep($this->flush_interval_in_mills * 1000);
     }
